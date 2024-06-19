@@ -96,8 +96,8 @@ const CreateForm: React.FC<{
 		const { result, error } = await write({ ...card, image: url });
 		if (error) toast("Unable to create card!", "error");
 		else if (result && result.id) {
-			push(`/view?id=${result.id}`);
-			toast("Created successfully!", "success");
+			await push(`/view?id=${result.id}`).then(() => toast("Created successfully!", "success"));
+			return;
 		} else toast("Unable to create card!", "error");
 		setLoading(false);
 	};
