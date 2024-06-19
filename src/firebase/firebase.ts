@@ -1,4 +1,3 @@
-import { getApp, getApps, initializeApp } from "firebase/app";
 import {
 	collection,
 	doc,
@@ -8,29 +7,13 @@ import {
 	DocumentData,
 	QueryDocumentSnapshot,
 	SnapshotOptions,
-	deleteDoc,
-	getFirestore
+	deleteDoc
 } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { CardItem } from "~/types";
 import { v4 as uuidv4 } from "uuid";
+import { firestore, storage } from "./config";
 
-let app;
-if (getApps().length === 0) {
-	app = initializeApp({
-		apiKey: process.env.API_KEY,
-		authDomain: process.env.AUTH_DOMAIN,
-		projectId: process.env.PROJECT_ID,
-		storageBucket: process.env.STORAGE_BUCKET,
-		messagingSenderId: process.env.MESSAGING_SENDER_ID,
-		appId: process.env.APP_ID
-	});
-} else {
-	app = getApp();
-}
-
-const firestore = getFirestore(app);
-const storage = getStorage();
 const db = collection(firestore, "cards");
 
 const write = async (data: CardItem, id?: string) => {
