@@ -174,8 +174,8 @@ const CreateForm: React.FC<{
 							<Flex
 								align="center"
 								justify="space-between"
-								borderWidth={card.message !== undefined && !card.image ? 2 : 1}
-								borderColor={card.message !== undefined && !card.image ? "red.500" : "gray.200"}
+								borderWidth={card.image !== undefined && !card.image ? 2 : 1}
+								borderColor={card.image !== undefined && !card.image ? "red.500" : "gray.200"}
 								borderRadius="md"
 								h="50px"
 								pl={4}
@@ -201,7 +201,7 @@ const CreateForm: React.FC<{
 									}
 								/>
 							</Flex>
-							{card.message !== undefined && !card.image && (
+							{card.image !== undefined && !card.image && (
 								<FormHelperText color="red.500">Include a valid image.</FormHelperText>
 							)}
 						</FormControl>

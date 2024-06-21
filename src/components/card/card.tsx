@@ -15,7 +15,7 @@ const Card: React.FC<{ card: CardItem | null }> = ({ card }) => {
 			w={{ base: "90vw", md: "470px" }}
 			px={6}
 			py={6}>
-			<Flex mx={-6} mt={-6} mb={6}>
+			<Flex mx={-6} mt={-6} mb={6} justify="center">
 				{image instanceof File ? (
 					<Image borderTopRadius="xl" src={URL.createObjectURL(image)} alt="Image" />
 				) : typeof image === "string" && image ? (
@@ -24,19 +24,22 @@ const Card: React.FC<{ card: CardItem | null }> = ({ card }) => {
 					<Image borderTopRadius="xl" src="/image.png" alt="Fallback Image" />
 				)}
 			</Flex>
-			<Text fontSize="sm" whiteSpace="pre-line">
-				<Text as="span" fontWeight="bold">
-					To:
-				</Text>{" "}
-				{recipient?.length ? recipient : "recipient"}
-				<br />
-				<Text as="span" fontWeight="bold">
-					From:
-				</Text>{" "}
-				{sender?.length ? sender : "sender"}
-			</Text>
+			<Flex flexDir="column" fontSize="md">
+				<Text fontWeight="bold">
+					To:{" "}
+					<Text as="span" fontWeight="normal">
+						{recipient?.length ? recipient : "recipient"}
+					</Text>
+				</Text>
+				<Text fontWeight="bold">
+					From:{" "}
+					<Text as="span" fontWeight="normal">
+						{sender?.length ? sender : "sender"}
+					</Text>
+				</Text>
+			</Flex>
 			<br />
-			<Text>{message?.length ? message : "your message here"}</Text>
+			<Text whiteSpace="pre-line">{message?.length ? message : "your message here"}</Text>
 		</Flex>
 	);
 };
