@@ -15,7 +15,7 @@ import {
 	useToast
 } from "@chakra-ui/react";
 import { ImagePlus, Images, MailPlus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CardItem, CardTemplateItem } from "~/types";
 import { useRouter } from "next/router";
 import ImagePicker from "./imagePicker";
@@ -47,7 +47,7 @@ const templates: CardTemplateItem[] = [
 
 const CreateForm: React.FC<{
 	card: CardItem | null;
-	setCard: any;
+	setCard: React.Dispatch<React.SetStateAction<CardItem | null>>;
 }> = ({ card, setCard }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [loading, setLoading] = useState(false);
@@ -66,10 +66,6 @@ const CreateForm: React.FC<{
 				isClosable: true
 			});
 	};
-
-	useEffect(() => {
-		setCard(card);
-	}, [card, setCard]);
 
 	if (!card) return <></>;
 
@@ -125,7 +121,10 @@ const CreateForm: React.FC<{
 							<Select
 								onChange={(e) => {
 									const template = templates.find((t) => t.name === e.target.value);
-									if (!template || template.name === "none") return;
+									if (!template || template.name === "none") {
+										setCard({ ...card, message: "", image: "" });
+										return;
+									}
 									setCard({ ...card, message: template.message, image: template.image });
 								}}>
 								{templates.map((_, i) => (

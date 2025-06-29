@@ -16,7 +16,7 @@ if (getApps().length === 0) {
 	app = getApp();
 }
 
-const firestore = getFirestore();
-const storage = getStorage();
+const firestore = getFirestore(app);
+const storage = getStorage(app);
 
 export { app, firestore, storage };
